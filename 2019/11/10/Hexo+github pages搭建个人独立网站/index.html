@@ -93,7 +93,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;pWE48dU.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;ThKg2Ce.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;1jW6kZI.jpg">
-<meta property="og:updated_time" content="2019-11-10T05:12:02.117Z">
+<meta property="og:updated_time" content="2019-11-10T07:01:49.043Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;4K0MvLr.png">
 
@@ -187,19 +187,29 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/%20" rel="section">
+          <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
             首页
           </a>
         </li>
       
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/%20" rel="section">
+        <li class="menu-item menu-item-categories">
+          <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
             归档
           </a>
@@ -377,6 +387,10 @@ deploy:
 <p>则在git bash输入以下命令：</p>
 <pre><code>$ npm install hexo-deployer-git --save</code></pre><p>再重新hexo d -g部署一下应该就可以了，如果还不行，可能是node.js版本太低之类的（之前就有人踩过这个坑）</p>
 <p>稍等片刻之后，输入你的仓库主页地址访问看看~比如我的是 <a href="https://huangjianxian.github.io" target="_blank" rel="noopener">https://huangjianxian.github.io</a></p>
+<p>备注：<br>hexo clean ：清除缓存文件 (db.json) 和已生成的静态文件 (public)</p>
+<p>hexo generate ：部署之前预先生成静态文件，简写为hexo g</p>
+<p>hexo deploy : 文件生成后立即部署网站，简写为hexo d</p>
+<p>在浏览器地址栏输入 <a href="https://username.github.io/" target="_blank" rel="noopener">https://username.github.io/</a> 即可访问，（username也就是你的Github账户名），如果能够正常访问，并且跟本地hexo项目显示的内容是一样的，那么说明你已经把本地hexo项目部署到Github上了。</p>
 <p>在本地计算机写好博文后，在使用 <strong>hexo d -g</strong> 或者 <strong>hexo d</strong> 命令与GitHub进行同步</p>
 <pre><code>$ hexo d -g
 $ hexo d</code></pre><p>Hexo+github pages 是我认为个人搭博客比较好的平台了，不需要花费很多钱去维护服务器。只需要搭建好之后安心写博客就行了。</p>
@@ -487,7 +501,7 @@ $ hexo d</code></pre><p>Hexo+github pages 是我认为个人搭博客比较好�
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/%20%7C%7C%20archive">
+                <a href="/archives/">
               
                   <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
