@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>liunx常用命令</title>
+    <url>/2019/11/10/liunx/</url>
+    <content><![CDATA[<p><strong>liunx服务器时间修改</strong></p>
+<pre><code>date -R
+cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</code></pre><p><strong>文件/文件夹 操作</strong></p>
+<p><strong>mkdir 新建 文件夹</strong></p>
+<p>在当前文件夹新建一个 bash 文件夹，完整的绝对路径就是 /root/bash</p>
+<pre><code>mkdir bash
+
+更多的命令可以用 mkdir --help 查看。</code></pre><p><strong>cd 进入 文件夹</strong></p>
+<p>你当前在 /root目录中，使用这个命令会进入 /root/bash目录，这是相对路径</p>
+<pre><code>cd bash</code></pre><p>如果你不在 /root目录中的话，就不能用上面的相对路径了，就需要绝对路径<br>    cd /root/bash</p>
+<p>假设你当前在 /root/bash目录中，使用相对路径，你可以用这个命令进入上一级 /root目录， .. 代表相对路径 上级目录</p>
+<pre><code>cd ..</code></pre><p>当然你也可以用绝对路径来进入上一级 /root目录</p>
+<pre><code>cd /root</code></pre><p><strong>cp 复制或重命名 文件/文件夹</strong></p>
+<p>复制当前目录内的 log.txt文件到 /var目录</p>
+<pre><code>cp log.txt /var/log.txt</code></pre><p>复制当前目录内的 bash文件夹到 /home目录</p>
+<pre><code>cp -R bash /home/bash</code></pre><p>复制当前目录内的所有.txt后缀的文件到 /var/log目录</p>
+<pre><code>cp *.txt /var/log</code></pre><p>复制当前目录内的所有以 doubi开头的文件到 /var/log目录</p>
+<pre><code>cp doubi* /var/log</code></pre><p>复制当前目录内的所有以 doubi开头 以.txt后缀结尾的文件到 /var/log目录<br>    cp doubi*.txt /var/log</p>
+<p>假设当前目录是 /root/doubi/log，要把这个目录中的所有.txt后缀的文件复制到上一级目录 /root/doubi，那么这样做</p>
+<pre><code>cp *.txt ..</code></pre><p>就是相对路径，代表上一级目录，当然你也可以用绝对路径，这样更不容易出错</p>
+<pre><code>cp *.txt /root/doubi
+
+重命名当前目录内的 log.txt文件为 log2.txt
+cp log.txt log2.txt
+
+复制当前目录内的 log.txt文件到 /var目录并重命名为 log1.txt
+cp log.txt /var/log1.txt
+
+复制当前目录内的 bash文件夹到 /home目录并重命名为 bash2
+cp -R bash /home/bash2
+
+复制当前目录内的 log.txt文件到 /var目录，但是 /var 目录中已经存着 log.txt，那么会提示 cp: overwrite `/var/log.txt&apos;? 可以用 -f 强制覆盖
+
+cp -f log /var/log.txt</code></pre><p>大家可能会发现，当你使用 cp -f 强制覆盖的时候，依然会询问你是否覆盖，这是因为 CP 为了避免你手误，默认加上了 -i 参数（该参数代表每次覆盖必须询问）。<br>所以想要避免 CP 默认的 -i 参数，只需要在 CP 命令前面加上斜杠即可 “/”</p>
+<pre><code>/cp -f log /var/log.txt</code></pre><p>复制当前目录内的 log.txt log1.txt log2.txt文件和 log233目录到 /home/log目录中</p>
+<pre><code>cp -R log.txt log1.txt log2.txt log233 /home/log
+
+更多的命令可以用 cp --help 查看</code></pre><p><strong>mv 移动或重命名 文件/文件夹</strong></p>
+<p>关于 mv 命令，可以参考上面 cp 的使用方法，没什么区别，只是一个是复制，一个是移动，把上面 cp 命令改成 mv 就能套用了。</p>
+<p>移动当前目录内的 log.txt文件到 /var目录</p>
+<pre><code>mv log.txt /var/log.txt</code></pre><p>移动当前目录内的 bash文件夹到 /home目录</p>
+<pre><code>mv bash /home/bash</code></pre><p>重命名当前目录内的 log.txt文件为 log2.txt</p>
+<pre><code>mv log.txt log2.txt</code></pre><p>复制当前目录内的 log.txt文件到 /var目录并重命名为 log1.txt</p>
+<p>mv log.txt /var/log1.txt</p>
+<p>复制当前目录内的 bash文件夹到 /home目录并重命名为 bash2</p>
+<pre><code>mv bash /home/bash2
+
+更多的命令可以用 mv --help 查看。</code></pre><p><strong>rm 删除 文件/文件夹</strong></p>
+<p>删除当前目录下的 log.txt文件</p>
+<pre><code>rm log.txt</code></pre><p>删除当前目录下所有.txt后缀的文件</p>
+<pre><code>rm *.txt</code></pre><p>使用 rm 命令删除时，会提示你是否确定删除，输入 y 即删除，输入 n 则取消</p>
+<p>rm: remove regular file `log.txt’? y</p>
+<p>删除当前目录下所有.txt后缀的文件</p>
+<pre><code>rm *.txt</code></pre><p>删除当前目录下所有以 doubi开头的文件</p>
+<pre><code>rm doubi*</code></pre><p>删除当前目录下所有以 doubi开头 以.txt后缀结尾的文件</p>
+<pre><code>rm doubi*.txt</code></pre><p>当你用 rm 删除目录的时候会发现提示这不是一个文件</p>
+<pre><code>rm bash
+rm: cannot remove `bash&apos;: Is a directory
+可以加上 -r 来归递删除目录及其目录下的内容
+rm -r bash</code></pre><p>因为为了避免手误删除错误，所以 rm默认是加上了 -i 的参数，也就是每一次删除文件/目录都会提示，如果觉得烦可以用 -rf 参数</p>
+<pre><code>rm -rf bash</code></pre><p>rm -rf 这个命令请慎重使用，而且千万不要使用 rm -rf / 或者 rm -rf /* 之类的命令(系统自杀)，可能会让你系统爆炸，所以使用请慎重！</p>
+<pre><code>更多的命令可以用 rm --help 查看。</code></pre><p><strong>VI 编辑文件内容</strong></p>
+<p>VI 介绍</p>
+<p>VI 是Linux很棒的一个文本编辑器，不过也存在一些缺点，比如操作麻烦。而 vim就相当于 VI 的加强版，主要介绍 VIM。</p>
+<p>VIM 介绍</p>
+<p>打开当前目录下的 log.txt文件，如果没有那么会新建 log.txt文件（安装vim后，使用 vi和 vim打开文件没区别）</p>
+<pre><code>vi log.txt
+
+vim log.txt</code></pre><p>在命令行模式下，直接输入以下 符号和字母(区分大小写)<br>    进入编辑模式（插入模式，按 Esc键 即可返回命令行模式）</p>
+<pre><code>i
+删除光标当前所在的一行
+dd
+删除文件内所有内容
+dddG
+复制光标当前所在的一行
+yy
+粘贴刚才复制的一行内容
+p
+撤销上个操作（误操作可以用这个恢复）
+u
+保存当前文件（ : 是英文的冒号）
+:w
+另存当前文件内容为 log2.txt
+:w log2.txt
+退出当前文件
+:q
+不保存 并强制退出当前文件
+:q!
+保存并退出当前文件
+:wq
+更多的命令可以用 vi --help / vim --help 来查看。</code></pre><p><strong>netstat 查看链接和端口监听等信息</strong></p>
+<p>参数介绍：</p>
+<pre><code>-n ：不显示别名（主机名/域名以 数字或IP显示）
+
+-e ：显示其他/更多信息
+
+-p ：显示进程PID/进程名
+
+-c ：持续输出（设置后会每隔 1秒输出一次，Ctrl+C 终止）
+
+-l ：显示正在监听的套接字
+
+-a ：显示全部信息</code></pre><p>下面这些就不很常用了。</p>
+<pre><code>-r ：显示路由表
+
+-i ：显示网络接口（网卡）
+
+-g ：显示多播组信息
+
+-s ：显示网络统计
+
+-M ：显示伪装连接
+
+-v ：显示正在进行的工作
+
+更多的命令可以用 netstat --help 来查看。</code></pre><p>使用示例：</p>
+<pre><code>显示当前服务器的所有连接信息
+netstat -a
+
+显示当前服务器的所有 TCP连接信息
+netstat -at
+
+显示当前服务器的所有 UDP连接信息
+netstat -au
+
+显示当前服务器的所有 端口监听信息
+netstat -lnp
+
+显示当前服务器的所有 TDP端口监听信息
+netstat -lntp</code></pre><p>一般来说经常使用这个命令：</p>
+<pre><code>显示当前服务器的所有正在监听 TCP端口的信息，并且 显示进程PID和进程名，但不显示别名（域名以IP显示），这个命令算是最常用的了。
+netstat -lntp
+
+输出示例
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      14233/nginx.conf
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      1555/sshd       
+tcp        0      0 0.0.0.0:443             0.0.0.0:*               LISTEN      14233/nginx.conf
+tcp6       0      0 :::22                   :::*                    LISTEN      1555/sshd
+—————————————————————————————————————
+显示监听 80端口的进程PID和进程名，grep是匹配并显示 符合关键词的行。
+netstat -lntp|grep &quot;:80&quot;
+
+输出示例
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      14233/nginx.conf
+—————————————————————————————————————
+显示 ssh的监听情况，grep是匹配并显示 符合关键词的行。
+netstat -lntp|grep &quot;ssh&quot;
+
+输出示例
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      1555/sshd</code></pre><p>表头解释：</p>
+<pre><code>Proto ：连接协议（tcp/udp是IPv4，tcp6/udp6是IPv6）
+Recv-Q ： 接收队列（基本都是0，如果不是代表堆积）
+Send-Q ：发送队列（基本都是0，如果不是代表堆积）
+Local Address ：本地地址和端口
+Foreign Address ：对外地址和端口
+State ：连接状态
+PID/Program name ：进程PID/进程名
+
+每隔 1秒显示一次当前服务器的所有连接信息
+netstat -c
+
+每隔 1秒显示一次当前服务器的所有 TCP连接信息
+netstat -ct
+
+每隔 1秒显示一次当前服务器的所有 UDP连接信息
+netstat -cu
+
+显示当前服务器的路由表
+netstat -r
+
+显示当前服务器的网络接口信息（网卡）
+netstat -i
+
+显示当前服务器的网络统计信息
+netstat -s
+
+更多的命令可以用 netstat --help 来查看。</code></pre><p>在使用 netstat命令中，会显示一些连接状态，下面是各状态的意思：</p>
+<pre><code>LISTEN
+监听来自远程连接的 TCP端口连接请求
+
+SYN-SENT
+发送连接请求后，等待匹配的连接请求
+
+SYN-RECEIVED
+在收到和发送一个连接请求后，等待对方对连接请求的确认
+
+ESTABLISHED
+代表一个打开的连接
+
+FIN-WAIT-1
+等待远程 TCP连接中断请求，或先前的连接中断请求的确认
+
+FIN-WAIT-2
+从远程 TCP等待连接中断请求 
+
+CLOSE-WAIT
+等待从本地用户发来的连接中断请求 
+
+CLOSING
+等待远程TCP对连接中断的确认 
+
+LAST-ACK
+等待原来的发向远程TCP的连接中断请求的确认 
+
+TIME-WAIT
+等待足够的时间，以确保远程TCP接收到连接中断请求的确认 
+
+CLOSED
+没有任何连接状态（或者关闭了连接）</code></pre><p><strong>ps 查看进程信息</strong></p>
+<p>参数介绍：</p>
+<pre><code>待写...
+
+# 更多的命令可以用 man ps 来查看。</code></pre><p>使用示例：</p>
+<pre><code>显示当前进程信息
+ps -ef
+
+显示 ssh 进程（ grep -v grep 表示排除关键词grep，因为使用 grep匹配ssh，也会把grep自己的进程匹配进去的）
+ps -ef|grep -v grep|grep &apos;ssh&apos;
+
+输出示例
+
+UID        PID  PPID  C STIME TTY          TIME CMD #注意使用上面命令的话是不会显示表头这一行的，我只是为了更好理解加上的
+root      1738     1  0 01/27   ?       00:08:56 /usr/sbin/sshd
+
+# 待写...</code></pre><p>表头解释：</p>
+<pre><code>UID ：启动进程的用户
+PID ：进程标识符（进程 1代表init 是整个系统的父进程）
+PPID ：父进程标识符（进程 1代表init 是整个系统的父进程）
+C ：CPU占用率 %
+STIME ：启动进程的日期
+TTY ：终端号
+TIME ：进程运行时间（非休眠状态）
+CMD ：启动进程的命令（或进程名/进程程序所在目录）</code></pre><p><strong>kill 结束进程</strong></p>
+<pre><code>当我们想要结束一个进程的时候，我们可以用 kill 命令
+PID是每个进程的一个唯一标识符，可以使用上面的 ps 命令来查看你要结束进程的PID。
+
+假设我们要结束 Nginx的进程，那么这样做（ grep -v grep 表示排除关键词grep，因为使用 grep匹配ssh，也会把grep自己的进程匹配进去的）：
+ps -ef|grep -v grep|grep &quot;nginx&quot;
+
+输出示例
+UID PID PPID C STIME TTY TIME CMD #注意使用上面命令的话是不会显示表头这一行的，我只是为了更好理解加上的
+root 2356 1 0 04/03 ? 00:03:12 nginx
+
+然后我们可以看到第二列的 PID 进程标识符，然后我们 kill 即可。
+kill -9 2356
+
+中断进程 -2 相当于 程序运行在前台，然后输入 Ctrl+C 的效果，但是进程有权利忽略，所以不一定能结束进程
+kill -2 PID
+强制结束进程 -9 ，注意：强制结束某个进程后，可能会造成进程数据丢失等问题！
+kill -9 PID</code></pre><p><strong>apt-get Debian/Ubuntu系统包管理器</strong></p>
+<p>apt-get 是Debian/Ubuntu系统中 一个用于快速下载/安装的简单命令行管理工具！</p>
+<p>点击展开 查看 apt-get命令说明</p>
+<p>参数介绍：</p>
+<pre><code>命令:
+update - 检索 新的包列表
+
+upgrade - 升级 可更新的所有软件包
+
+install - 安装 新软件包（pkg是libc6不是libc6.deb）
+
+remove - 删除 软件包
+
+autoremove - 自动删除 所有未使用的软件包
+
+purge - 删除 软件包和配置文件
+
+clean - 清除 已下载的归档文件
+
+autoclean - 清除 旧的下载的档案文件
+
+check - 验证 是否有损坏的依赖
+
+download - 下载 二进制包到当前目录
+
+选项：
+-q ：不输出任何信息
+
+-qq ：除了错误之外，没有输出
+
+-d ：仅下载，不要安装或解压缩存档
+
+-y ：对所有确定询问都选择 Yes，并且不提示
+
+-f ：尝试纠正 被破坏依赖关系的系统
+
+-m ：如果存档是可定位的，则尝试继续
+
+-u ：显示升级包的列表
+
+-b ：在获取源代码包后构建源包
+
+更多的命令可以用 apt-get --help 查看。</code></pre><p>使用示例：</p>
+<pre><code>检索 新的包列表
+apt-get update
+
+升级 可更新的所有软件包（注意这个命令会升级所有的软件包，所以会升级很长时间）
+apt-get upgrade
+
+安装 Nginx 软件包
+apt-get install nginx
+
+卸载 Nginx 软件包
+apt-get remove nginx
+
+卸载 Nginx 软件包 并删除所有相关配置文件
+apt-get remove --purge nginx
+
+在安装软件和卸载的时候，为了避免误操作，都会询问是否继续，每次都要输入 y 来确定会很麻烦，可以加上 -y 参数
+
+安装 Nginx 软件包 并不显示确定提示
+apt-get install nginx -y
+
+卸载 Nginx 软件包，删除所有相关配置文件 并不显示提示
+apt-get remove --purge nginx -y
+
+清除 旧的/无用 的软件包
+apt-get clean &amp;&amp; apt-get autoclean
+
+下载 Nginx 二进制软件包到当前目录，但不解压和安装
+apt-get download nginx -d
+
+更多的命令可以用 apt-get --help 查看。</code></pre><p><strong>yum CentOS系统包管理器</strong></p>
+<p>yum 是CentOS系统中 一个用于快速下载/安装的简单命令行管理工具！</p>
+<p>点击展开 查看 yum命令说明</p>
+<p>参数介绍：</p>
+<pre><code>命令：
+update - 检索 新的包列表
+
+upgrade - 升级 软件包
+
+search - 搜索 软件包
+
+install - 安装 软件包
+
+list - 列出 软件包或者软件包组
+
+info - 显示软件包或者软件包组的详细信息
+
+erase - 删除 软件包（这两个命令一样）
+
+remove - 删除 软件包（这两个命令一样）
+
+groupinfo - 显示 有关包组的详细信息
+
+groupinstall - 安装 软件包组（就像一种软件合集）
+
+grouplist - 列出 可用的软件包组
+
+groupremove - 删除 软件包组
+
+check - 检查 软件包
+
+check-update - 检查 可更新的软件包
+
+clean - 清除 缓存目录内的软件包
+
+deplist - 列出 一个包的依赖关系
+
+distribution-synchronization - 同步 已安装的软件包到最新的版本
+downgrad - 降级 一个软件包
+
+reinstall - 重新安装 软件包（自动删除重装）
+
+repolist - 显示 配置的软件包仓库
+
+resolvedep - 确定 软件包需要的依赖关系
+
+选项：
+
+-t ：容忍错误
+
+-C ：完全从系统缓存运行，不要更新缓存
+
+-R 分钟 ：最大命令等待时间
+
+-q ：安静的操作
+
+-y ：对于所有问题回答是
+
+--nogpgcheck ：禁用gpg签名检查
+
+更多的命令可以用 yum --help 查看。
+
+检索 新的包列表
+yum update
+
+安装 Nginx 软件包
+yum install nginx
+
+安装 Development Tools 软件包组（这个软件包组中包含了编译所需的软件）
+
+注意：当软件包或者软件包组的名字中包含空格的时候，请把 软件包或软件包组 加上双引号！
+yum groupinstall &quot;Development Tools&quot;
+
+卸载 Nginx 软件包
+yum erase nginx / yum remove nginx
+
+卸载 Development Tools 软件包组
+yum groupremove &quot;Development Tools&quot;
+
+升级 所有可更新的软件包
+yum upgrade
+
+升级 Nginx 可更新的软件包
+yum upgrade nginx
+
+在安装软件和卸载的时候，为了避免误操作，都会询问是否继续，每次都要输入 y 来确定会很麻烦，可以加上 -y 参数
+
+安装 Nginx 软件包 并不显示确定提示
+yum install nginx -y
+
+卸载 Nginx 软件包 并不显示确定提示
+yum erase nginx -y / yum remove nginx -y
+
+搜索 Nginx 软件包是否存着
+yum search nginx
+
+列出 可用的软件包
+yum list
+
+列出 可用的软件包组
+yum grouplist
+
+清除 缓存目录中的所有软件包
+yum clean
+
+清除 缓存目录中的 Nginx 软件包
+yum clean nginx
+
+重装 Nginx 软件包
+yum reinstall nginx
+
+更多的命令可以用 yum --help 查看。</code></pre>]]></content>
+  </entry>
+  <entry>
+    <title>Hexo+github pages搭建个人独立网站</title>
+    <url>/2019/11/10/Hexo+github%20pages%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E7%8B%AC%E7%AB%8B%E7%BD%91%E7%AB%99/</url>
+    <content><![CDATA[<h1 id="Hexo-github-pages搭建个人独立网站"><a href="#Hexo-github-pages搭建个人独立网站" class="headerlink" title="Hexo+github pages搭建个人独立网站"></a>Hexo+github pages搭建个人独立网站</h1><p>本文修改自HuangJianxian的博文，精简了些许步骤，如需详细步骤，请前往原文<a href="https://hjxlog.com/19090816.html" target="_blank" rel="noopener">https://hjxlog.com/19090816.html</a></p>
+<p><strong>1 安装nodejs</strong><br><img src="https://i.imgur.com/4K0MvLr.png" alt=""></p>
+<p>因为Hexo需要nodejs环境，因此需要先下载安装Nodejs。点击NodeJs官网，下载最新版本。</p>
+<p>下载好一直next，选择一个文件夹位置在一直next即可完成，这个步骤很简单，就不放图了。</p>
+<p><strong>2 安装git</strong></p>
+<p>点击git官网，下载安装包。<br><img src="https://i.imgur.com/JIrWoaf.png" alt=""></p>
+<p>点击next，选择文件夹位置，然后一直next到底就行了，选择默认配置就好，默认配置会将环境变量配置好的，不需要搞得花里胡哨的。安装好后鼠标右击应该有下图这两个选项了，出现就代表安装成功了。<br><img src="https://i.imgur.com/xlMetxA.png" alt=""></p>
+<p><strong>3 安装Hexo</strong></p>
+<p>上面环境搭建好之后，在桌面点击鼠标右键，点击 “Git Bash Here” ，输入以下两条命令。</p>
+<pre><code>$ npm install -g hexo-cli</code></pre><p>提示：输入的时候不要输入 $ 了，因为命令行本来就已经有了。下载需要几分钟，请耐心等待一下。</p>
+<p>可以在复制之后在git窗选择 Shift+Insert 粘贴。有一些警告WARN是不影响使用的，放心。<br><img src="https://i.imgur.com/ZyIhR60.png" alt=""></p>
+<p>（1）初始化Hexo</p>
+<p>安装好Hexo之后，新建一个文件夹，如 E:\HEXO ，然后在该文件夹内鼠标右击，选择 “Git Bash Here” ，输入以下命令。</p>
+<pre><code>$ hexo init</code></pre><p>稍等片刻即可完成，如图：<br><img src="https://i.imgur.com/pWE48dU.png" alt=""></p>
+<p>文件结构如图所示：</p>
+<p>scaffolds是模版文件夹，当你新建文章时，Hexo 会根据 scaffold 来建立文件。</p>
+<p>source文件夹是存放用户资源的地方。</p>
+<p>themes是主题文件夹，Hexo 会根据主题来生成静态页面，待会我们会更换成比较流行的nexT主题。</p>
+<p>然后再输入命令行进行本地调试，即可看到初始效果啦~</p>
+<pre><code>$ hexo s --debug</code></pre><p>访问<a href="http://localhost:4000/即可看到效果：" target="_blank" rel="noopener">http://localhost:4000/即可看到效果：</a></p>
+<p><strong>4 更换主题为NexT</strong></p>
+<p>上面虽然本地可以调试成功了，但是默认的主题实在不是特别好看。你可以选择去官网选择自己喜欢的主题，官网主题链接<a href="https://hexo.io/themes/" target="_blank" rel="noopener">https://hexo.io/themes/</a></p>
+<p>本篇教程选择的是当前流行的NexT主题，这个主题是我感觉用过的最好的一个了。</p>
+<p><strong>5 下载NexT主题</strong></p>
+<p>进入刚刚你创建的文件夹的themes里，比如我的 E:\HEXO\themes ，鼠标右击选择“Git Bash Here”输入以下两条命令中的一个：（这两个是一样的，只是有同学反应第一条命令不行，第二条就可以。）</p>
+<pre><code>$ git clone git@github.com:iissnan/hexo-theme-next.git
+
+$ git clone https://github.com/iissnan/hexo-theme-next</code></pre><p>此时 themes 文件夹便多了一个next主题的文件夹。</p>
+<p><strong>6 修改配置</strong></p>
+<p>打开 E:\HEXO （你的hexo根目录）下的 _config.yml 配置文件</p>
+<p>找到下面这段代码</p>
+<pre><code># Extensions
+## Plugins: https://hexo.io/plugins/
+## Themes: https://hexo.io/themes/
+    theme: landscape</code></pre><p>将langscape替换成hexo-theme-next</p>
+<pre><code>theme: hexo-theme-next</code></pre><p>重新在项目根目录下进行本地部署调试</p>
+<pre><code>$ hexo s --debug</code></pre><p>即可看到效果</p>
+<p><strong>7 部署到github</strong></p>
+<p><strong>（1） 新建仓库</strong></p>
+<p>新建的仓库名必须要是 yourusername.github.io ，比如我的就是huangjianxian.github.io ，否则等下不能绑定GitHub pages 访问。</p>
+<p><strong>（2） 配置SSH密钥</strong></p>
+<p>为了使本地可以跟远程的github建立联系，需要在本地配置SSH密钥，这样我们就可以在本地直接提交代码到GitHub上。<br>如果你是第一次配置SSH，则配置一下git的username 和 email</p>
+<pre><code>$ git config --global user.name &quot;你要设置的名字&quot;
+$ git config --global user.email &quot;你要设置的邮箱&quot;</code></pre><p>之后生成SSH密钥：</p>
+<pre><code>$ ssh-keygen -t rsa -C &quot;你刚刚设置的邮箱&quot;</code></pre><p>如果不需要设置密码的话，连续三个回车就好了。在这之后会得到两个文件： id_rsa 和 id_rsa.pub<br>找到id_rsa.pub文件，用记事本打开，复制其内容。路径： C:\Users\J（你的用户名）.ssh</p>
+<p><strong>（4） 在GitHub上添加SSH密钥</strong></p>
+<p>登录GitHub，在Settings里面选择 SSH and GPG keys ，然后点击 New SSH Key</p>
+<p>完成之后测试一下，在git bash输入：</p>
+<pre><code>$ ssh -T git@github.com</code></pre><p>如果看到了你的用户名，则表示配置成功了。</p>
+<p><strong>（5） 初始化GitHub pages</strong></p>
+<p>打开GitHub上面的仓库，点击settings</p>
+<p>拉到下面，在GitHub Pages那里选择一个主题，确定之后即可通过域名来访问啦~比如我的<a href="https://huangjianxian.github.io" target="_blank" rel="noopener">https://huangjianxian.github.io</a></p>
+<p><strong>（6） 将本地Hexo文件部署到GitHub上</strong></p>
+<p>登录GitHub，打开之前新建好的仓库 username.github.io ，clone，选择SSH类型<br><img src="https://i.imgur.com/ThKg2Ce.png" alt=""></p>
+<p>打开本地站点配置文件，如E:\HEXO （你的hexo根目录）下的 _config.yml 配置文件。</p>
+<p>这里整个项目有两个_config.yml，文件。</p>
+<p>一个是位于你的hexo根目录下面的，叫做站点配置文件。</p>
+<p>另一个是位于你的主题文件夹目录下面的，叫做主题配置文件。</p>
+<p>这里打开站点配置文件，找到deploy，比如我的是：</p>
+<pre><code># Deployment
+## Docs: https://hexo.io/docs/deployment.html
+deploy:
+  type: git
+    repo: git@github.com:huangjianxian/huangjianxian.github.io.git
+    branch: master</code></pre><p>将repo替换成你的GitHub仓库的SSH链接即可。</p>
+<p>在你的项目根目录下使用git bash，输入命令部署：</p>
+<pre><code>$ hexo d -g</code></pre><p>如果有同学是出现这个报错：</p>
+<p>ERROR Deployer not found:git</p>
+<p><img src="https://i.imgur.com/1jW6kZI.jpg" alt=""></p>
+<p>则在git bash输入以下命令：</p>
+<pre><code>$ npm install hexo-deployer-git --save</code></pre><p>再重新hexo d -g部署一下应该就可以了，如果还不行，可能是node.js版本太低之类的（之前就有人踩过这个坑）</p>
+<p>稍等片刻之后，输入你的仓库主页地址访问看看~比如我的是 <a href="https://huangjianxian.github.io" target="_blank" rel="noopener">https://huangjianxian.github.io</a></p>
+<p>备注：<br>hexo clean ：清除缓存文件 (db.json) 和已生成的静态文件 (public)</p>
+<p>hexo generate ：部署之前预先生成静态文件，简写为hexo g</p>
+<p>hexo deploy : 文件生成后立即部署网站，简写为hexo d</p>
+<p>在浏览器地址栏输入 <a href="https://username.github.io/" target="_blank" rel="noopener">https://username.github.io/</a> 即可访问，（username也就是你的Github账户名），如果能够正常访问，并且跟本地hexo项目显示的内容是一样的，那么说明你已经把本地hexo项目部署到Github上了。</p>
+<p>在本地计算机写好博文后，在使用 <strong>hexo d -g</strong> 或者 <strong>hexo d</strong> 命令与GitHub进行同步</p>
+<pre><code>$ hexo d -g
+$ hexo d</code></pre><p>Hexo+github pages 是我认为个人搭博客比较好的平台了，不需要花费很多钱去维护服务器。只需要搭建好之后安心写博客就行了。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2019/11/10/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>github fork别人仓库后源码同步</title>
+    <url>/2019/11/10/github/</url>
+    <content><![CDATA[<p><em>1</em>.使用 <strong>git remote -v</strong> 查看当前的远程仓库地址，输出如下：</p>
+<pre><code>origin  https://github.com/goochen/magnetW.git (fetch)
+origin  https://github.com/goochen/magnetW.git (push)</code></pre><p>可以看到从自己帐号 clone 下来的仓库，远程仓库地址是与自己的远程仓库绑定的<br>接下来运行进行添加别名 upstream（上游） 的地址，也就是指向我之前 Fork 的原仓库地址</p>
+<p><em>2</em>.<strong>git remote add upstream</strong> <a href="https://github.com/dengyuhan/magnetW.git" target="_blank" rel="noopener">https://github.com/dengyuhan/magnetW.git</a></p>
+<p>再次使用 git remote -v 输出如下：</p>
+<pre><code>origin  https://github.com/goochen/magnetW.git (fetch)
+origin  https://github.com/goochen/magnetW.git (push)
+upstream        https://github.com/dengyuhan/magnetW.git (fetch)
+upstream        https://github.com/dengyuhan/magnetW.git (push)</code></pre><p>可以看到了我们项目以及 upstream 上游项目<br>之后运行下面几条命令，就可以保持本地仓库和上游仓库同步了</p>
+<p><em>3</em>.将上游仓库的 master 分支下载到本地当前 branch 中</p>
+<p><strong>git fetch upstream</strong></p>
+<p>进行合并</p>
+<p><strong>git merge upstream/master</strong></p>
+<p>进行推送提交</p>
+<p><strong>git push origin master</strong></p>
+]]></content>
+  </entry>
+</search>
