@@ -79,15 +79,25 @@
 
 
 
-<meta name="description" content="1.使用 git remote -v 查看当前的远程仓库地址，输出如下： origin  https:&#x2F;&#x2F;github.com&#x2F;goochen&#x2F;magnetW.git (fetch) origin  https:&#x2F;&#x2F;github.com&#x2F;goochen&#x2F;magnetW.git (push)可以看到从自己帐号 clone 下来的仓库，远程仓库地址是与自己的远程仓库绑定的接下来运行进行添加别名 ups">
+<meta name="description" content="1在本地计算机建立一个文件夹 在文件夹内点击鼠标右键启动Git Bash Here输入命令 git clone git@github.com:goochen&#x2F;magnetW.git将github的项目下载到本地项目地址改成你自己的输入命令 cd magnetW进入magnetW文件夹 2.使用 git remote -v 查看当前的远程仓库地址，输出如下： origin  https:&#x2F;&#x2F;gith">
 <meta property="og:type" content="article">
 <meta property="og:title" content="github fork别人仓库后源码同步">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;10&#x2F;github&#x2F;index.html">
 <meta property="og:site_name" content="goochen">
-<meta property="og:description" content="1.使用 git remote -v 查看当前的远程仓库地址，输出如下： origin  https:&#x2F;&#x2F;github.com&#x2F;goochen&#x2F;magnetW.git (fetch) origin  https:&#x2F;&#x2F;github.com&#x2F;goochen&#x2F;magnetW.git (push)可以看到从自己帐号 clone 下来的仓库，远程仓库地址是与自己的远程仓库绑定的接下来运行进行添加别名 ups">
+<meta property="og:description" content="1在本地计算机建立一个文件夹 在文件夹内点击鼠标右键启动Git Bash Here输入命令 git clone git@github.com:goochen&#x2F;magnetW.git将github的项目下载到本地项目地址改成你自己的输入命令 cd magnetW进入magnetW文件夹 2.使用 git remote -v 查看当前的远程仓库地址，输出如下： origin  https:&#x2F;&#x2F;gith">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-10T03:20:17.759Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;BAqbayJ.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;rTY52Rt.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;XtzhduQ.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;UAsUSoW.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;K1zuEqt.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;CTGQ7sn.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;exj8Zdv.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;dvkixqX.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;Uao8O2A.png">
+<meta property="og:updated_time" content="2019-11-10T10:11:19.781Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;i.imgur.com&#x2F;BAqbayJ.png">
 
 
 
@@ -341,21 +351,25 @@
       
 
       
-        <p><em>1</em>.使用 <strong>git remote -v</strong> 查看当前的远程仓库地址，输出如下：</p>
+        <p><strong>1</strong>在本地计算机建立一个文件夹</p>
+<p>在文件夹内点击鼠标右键启动Git Bash Here输入命令</p>
+<pre><code>git clone git@github.com:goochen/magnetW.git</code></pre><p>将github的项目下载到本地<br><img src="https://i.imgur.com/BAqbayJ.png" alt=""><br>项目地址改成你自己的<br>输入命令</p>
+<pre><code>cd magnetW</code></pre><p>进入magnetW文件夹<br><img src="https://i.imgur.com/rTY52Rt.png" alt=""></p>
+<p><em>2</em>.使用 <strong>git remote -v</strong> 查看当前的远程仓库地址，输出如下：<br><img src="https://i.imgur.com/XtzhduQ.png" alt=""></p>
 <pre><code>origin  https://github.com/goochen/magnetW.git (fetch)
-origin  https://github.com/goochen/magnetW.git (push)</code></pre><p>可以看到从自己帐号 clone 下来的仓库，远程仓库地址是与自己的远程仓库绑定的<br>接下来运行进行添加别名 upstream（上游） 的地址，也就是指向我之前 Fork 的原仓库地址</p>
-<p><em>2</em>.<strong>git remote add upstream</strong> <a href="https://github.com/dengyuhan/magnetW.git" target="_blank" rel="noopener">https://github.com/dengyuhan/magnetW.git</a></p>
-<p>再次使用 git remote -v 输出如下：</p>
+origin  https://github.com/goochen/magnetW.git (push)</code></pre><p>可以看到从自己帐号 clone 下来的仓库，远程仓库地址是与自己的远程仓库绑定的<br>接下来运行进行添加别名 upstream（上游） 的地址，也就是指向我之前 Fork 的原仓库地址<br><img src="https://i.imgur.com/UAsUSoW.png" alt=""></p>
+<p><em>3</em>.git remote add upstream <a href="https://github.com/dengyuhan/magnetW.git" target="_blank" rel="noopener">https://github.com/dengyuhan/magnetW.git</a><br><img src="https://i.imgur.com/K1zuEqt.png" alt=""></p>
+<p>再次使用 git remote -v 输出如下：<br><img src="https://i.imgur.com/CTGQ7sn.png" alt=""></p>
 <pre><code>origin  https://github.com/goochen/magnetW.git (fetch)
 origin  https://github.com/goochen/magnetW.git (push)
 upstream        https://github.com/dengyuhan/magnetW.git (fetch)
 upstream        https://github.com/dengyuhan/magnetW.git (push)</code></pre><p>可以看到了我们项目以及 upstream 上游项目<br>之后运行下面几条命令，就可以保持本地仓库和上游仓库同步了</p>
-<p><em>3</em>.将上游仓库的 master 分支下载到本地当前 branch 中</p>
-<p><strong>git fetch upstream</strong></p>
+<p><em>4</em>.将上游仓库的 master 分支下载到本地当前 branch 中</p>
+<p><strong>git fetch upstream</strong><br><img src="https://i.imgur.com/exj8Zdv.png" alt=""></p>
 <p>进行合并</p>
-<p><strong>git merge upstream/master</strong></p>
+<p><strong>git merge upstream/master</strong><br><img src="https://i.imgur.com/dvkixqX.png" alt=""></p>
 <p>进行推送提交</p>
-<p><strong>git push origin master</strong></p>
+<p><strong>git push origin master</strong><br><img src="https://i.imgur.com/Uao8O2A.png" alt=""></p>
 
       
     </div>
@@ -386,8 +400,8 @@ upstream        https://github.com/dengyuhan/magnetW.git (push)</code></pre><p>�
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/11/10/hello-world/" rel="prev" title="Hello World">
-                Hello World <i class="fa fa-chevron-right"></i>
+              <a href="/2019/11/10/Hexo+github%20pages%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E7%8B%AC%E7%AB%8B%E7%BD%91%E7%AB%99/" rel="prev" title="Hexo+github pages搭建个人独立网站">
+                Hexo+github pages搭建个人独立网站 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -456,7 +470,7 @@ upstream        https://github.com/dengyuhan/magnetW.git (push)</code></pre><p>�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
