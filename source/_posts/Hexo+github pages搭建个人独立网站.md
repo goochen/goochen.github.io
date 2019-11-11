@@ -1,0 +1,190 @@
+
+# Hexo+github pages搭建个人独立网站 #
+
+本文修改自HuangJianxian的博文，精简了些许步骤，如需详细步骤，请前往原文[https://hjxlog.com/19090816.html](https://hjxlog.com/19090816.html)
+
+**1 安装nodejs**
+![](https://i.imgur.com/4K0MvLr.png)
+
+因为Hexo需要nodejs环境，因此需要先下载安装Nodejs。点击NodeJs官网，下载最新版本。
+
+下载好一直next，选择一个文件夹位置在一直next即可完成，这个步骤很简单，就不放图了。
+
+**2 安装git**
+
+点击git官网，下载安装包。
+![](https://i.imgur.com/JIrWoaf.png)
+
+点击next，选择文件夹位置，然后一直next到底就行了，选择默认配置就好，默认配置会将环境变量配置好的，不需要搞得花里胡哨的。安装好后鼠标右击应该有下图这两个选项了，出现就代表安装成功了。
+![](https://i.imgur.com/xlMetxA.png)
+
+**3 安装Hexo**
+
+上面环境搭建好之后，在桌面点击鼠标右键，点击 “Git Bash Here” ，输入以下两条命令。
+
+	$ npm install -g hexo-cli
+
+提示：输入的时候不要输入 $ 了，因为命令行本来就已经有了。下载需要几分钟，请耐心等待一下。
+
+可以在复制之后在git窗选择 Shift+Insert 粘贴。有一些警告WARN是不影响使用的，放心。
+![](https://i.imgur.com/ZyIhR60.png)
+
+（1）初始化Hexo
+
+安装好Hexo之后，新建一个文件夹，如 E:\HEXO ，然后在该文件夹内鼠标右击，选择 “Git Bash Here” ，输入以下命令。
+
+	$ hexo init
+
+稍等片刻即可完成，如图：
+![](https://i.imgur.com/pWE48dU.png)
+
+文件结构如图所示：
+
+scaffolds是模版文件夹，当你新建文章时，Hexo 会根据 scaffold 来建立文件。
+
+source文件夹是存放用户资源的地方。
+
+themes是主题文件夹，Hexo 会根据主题来生成静态页面，待会我们会更换成比较流行的nexT主题。
+
+然后再输入命令行进行本地调试，即可看到初始效果啦~
+
+	$ hexo s --debug
+
+
+
+访问http://localhost:4000/即可看到效果：
+
+**4 更换主题为NexT**
+
+上面虽然本地可以调试成功了，但是默认的主题实在不是特别好看。你可以选择去官网选择自己喜欢的主题，官网主题链接https://hexo.io/themes/
+
+本篇教程选择的是当前流行的NexT主题，这个主题是我感觉用过的最好的一个了。
+
+**5 下载NexT主题**
+
+进入刚刚你创建的文件夹的themes里，比如我的 E:\HEXO\themes ，鼠标右击选择“Git Bash Here”输入以下两条命令中的一个：（这两个是一样的，只是有同学反应第一条命令不行，第二条就可以。）
+
+	$ git clone git@github.com:iissnan/hexo-theme-next.git
+
+	$ git clone https://github.com/iissnan/hexo-theme-next
+
+
+此时 themes 文件夹便多了一个next主题的文件夹。
+
+**6 修改配置**
+
+打开 E:\HEXO （你的hexo根目录）下的 _config.yml 配置文件
+
+找到下面这段代码
+
+	# Extensions
+	## Plugins: https://hexo.io/plugins/
+	## Themes: https://hexo.io/themes/
+		theme: landscape
+
+将langscape替换成hexo-theme-next
+
+	theme: hexo-theme-next
+
+重新在项目根目录下进行本地部署调试
+
+	$ hexo s --debug
+
+即可看到效果
+
+**7 部署到github**
+
+**（1） 新建仓库**
+
+
+新建的仓库名必须要是 yourusername.github.io ，比如我的就是huangjianxian.github.io ，否则等下不能绑定GitHub pages 访问。
+
+**（2） 配置SSH密钥**
+
+为了使本地可以跟远程的github建立联系，需要在本地配置SSH密钥，这样我们就可以在本地直接提交代码到GitHub上。
+如果你是第一次配置SSH，则配置一下git的username 和 email
+
+	$ git config --global user.name "你要设置的名字"
+	$ git config --global user.email "你要设置的邮箱"
+
+之后生成SSH密钥：
+
+	$ ssh-keygen -t rsa -C "你刚刚设置的邮箱"
+
+如果不需要设置密码的话，连续三个回车就好了。在这之后会得到两个文件： id_rsa 和 id_rsa.pub
+找到id_rsa.pub文件，用记事本打开，复制其内容。路径： C:\Users\J（你的用户名）\.ssh
+
+**（4） 在GitHub上添加SSH密钥**
+
+登录GitHub，在Settings里面选择 SSH and GPG keys ，然后点击 New SSH Key
+
+
+完成之后测试一下，在git bash输入：
+
+	$ ssh -T git@github.com
+
+如果看到了你的用户名，则表示配置成功了。
+
+**（5） 初始化GitHub pages**
+
+打开GitHub上面的仓库，点击settings
+
+拉到下面，在GitHub Pages那里选择一个主题，确定之后即可通过域名来访问啦~比如我的https://huangjianxian.github.io
+
+**（6） 将本地Hexo文件部署到GitHub上**
+
+登录GitHub，打开之前新建好的仓库 username.github.io ，clone，选择SSH类型
+![](https://i.imgur.com/ThKg2Ce.png)
+
+打开本地站点配置文件，如E:\HEXO （你的hexo根目录）下的 _config.yml 配置文件。
+
+这里整个项目有两个_config.yml，文件。
+
+一个是位于你的hexo根目录下面的，叫做站点配置文件。
+
+另一个是位于你的主题文件夹目录下面的，叫做主题配置文件。
+
+这里打开站点配置文件，找到deploy，比如我的是：
+
+	# Deployment
+	## Docs: https://hexo.io/docs/deployment.html
+	deploy:
+  	type: git
+  	  repo: git@github.com:huangjianxian/huangjianxian.github.io.git
+  	  branch: master
+
+将repo替换成你的GitHub仓库的SSH链接即可。
+
+在你的项目根目录下使用git bash，输入命令部署：
+
+	$ hexo d -g
+
+如果有同学是出现这个报错：
+
+ERROR Deployer not found:git
+
+![](https://i.imgur.com/1jW6kZI.jpg)
+
+则在git bash输入以下命令：
+
+	$ npm install hexo-deployer-git --save
+
+再重新hexo d -g部署一下应该就可以了，如果还不行，可能是node.js版本太低之类的（之前就有人踩过这个坑）
+
+稍等片刻之后，输入你的仓库主页地址访问看看~比如我的是 https://huangjianxian.github.io
+
+备注：
+hexo clean ：清除缓存文件 (db.json) 和已生成的静态文件 (public)
+
+hexo generate ：部署之前预先生成静态文件，简写为hexo g
+
+hexo deploy : 文件生成后立即部署网站，简写为hexo d
+
+在浏览器地址栏输入 https://username.github.io/ 即可访问，（username也就是你的Github账户名），如果能够正常访问，并且跟本地hexo项目显示的内容是一样的，那么说明你已经把本地hexo项目部署到Github上了。
+
+在本地计算机写好博文后，在使用 **hexo d -g** 或者 **hexo d** 命令与GitHub进行同步
+
+	$ hexo d -g
+	$ hexo d
+
+Hexo+github pages 是我认为个人搭博客比较好的平台了，不需要花费很多钱去维护服务器。只需要搭建好之后安心写博客就行了。
